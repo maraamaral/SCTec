@@ -21,13 +21,13 @@ Corresponde à análise exploratória do dataset **Titanic.csv**, com o objetivo
 ---
 
 ## 📂 Estrutura do Projeto
-titanic-analysis/
+Titanic-Analysis/
 
 ├── data/ # dataset original ou link para download
 
 ├── notebooks/ # Jupyter Notebook com análise 
 
-├── images/ # gráficos exportados 
+├── results/ # gráficos exportados 
 
 ├── README.md # explicação do projeto 
 
