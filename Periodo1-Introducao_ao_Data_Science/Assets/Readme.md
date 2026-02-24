@@ -22,11 +22,17 @@ Corresponde à análise exploratória do dataset **Titanic.csv**, com o objetivo
 
 ## 📂 Estrutura do Projeto
 titanic-analysis/
+
 ├── data/ # dataset original ou link para download
+
 ├── notebooks/ # Jupyter Notebook com análise 
+
 ├── images/ # gráficos exportados 
+
 ├── README.md # explicação do projeto 
+
 └── requirements.txt # bibliotecas utilizadas
+
 
 
 ## 📌 Etapas da análise
