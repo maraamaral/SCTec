@@ -1,12 +1,37 @@
 # 🚢 Análise Exploratória - Dataset Titanic
 
-Este projeto realiza uma análise exploratória do dataset **Titanic.csv**, com o objetivo de compreender as características populacionais dos passageiros e investigar os fatores associados à sobrevivência.
+Este projeto foi desenvolvido como atividade extra durante a realização do curso **Introdução ao Data Science (SENAI, 20h)**.
+Corresponde à análise exploratória do dataset **Titanic.csv**, com o objetivo de compreender as características populacionais dos passageiros e investigar os fatores associados à sobrevivência.
 
 ---
 
-## 📌 Objetivos da análise
+## 🚀 Objetivos do Projeto
+- Explorar dados de passageiros do Titanic.
+- Identificar padrões de sobrevivência relacionados a gênero, idade e classe social.
+- Demonstrar habilidades em manipulação de dados, visualização e análise exploratória.
+
+---
+
+## 🛠️ Ferramentas Utilizadas
+- **Python** (Pandas, NumPy)
+- **Visualização:** Matplotlib, Seaborn
+- **SQL básico** para consultas
+- **Jupyter Notebook** para desenvolvimento
+  
+---
+
+## 📂 Estrutura do Projeto
+titanic-analysis/
+├── data/ # dataset original ou link para download
+├── notebooks/ # Jupyter Notebook com análise 
+├── images/ # gráficos exportados 
+├── README.md # explicação do projeto 
+└── requirements.txt # bibliotecas utilizadas
+
+
+## 📌 Etapas da análise
 - Limpeza e organização dos dados (remoção, reordenação e renomeação de colunas).
-- Tratamento de valores nulos de forma consistente.
+- Tratamento de valores nulos.
 - Verificação da premissa de que o valor do ticket reflete a classe social.
 - Descrição das características populacionais dos passageiros por classe (idade e sexo).
 - Descrição das características dos sobreviventes por classe (idade e sexo).
