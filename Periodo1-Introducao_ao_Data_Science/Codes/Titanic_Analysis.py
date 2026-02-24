@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[184]:
+# In[ ]:
 
 
 print("""
@@ -21,7 +21,7 @@ A análise será conduzida em etapas que incluem:
 """)
 
 
-# In[153]:
+# In[ ]:
 
 
 #iniciando a biblioteca pandas
@@ -32,14 +32,14 @@ import numpy as np
 from tabulate import tabulate
 
 
-# In[192]:
+# In[ ]:
 
 
 #lendo o arquivo csv e armazenando em um dataframe
 df = pd.read_csv('../Src/titanic_dataset.csv')
 
 
-# In[185]:
+# In[ ]:
 
 
 #exibindo as primeiras linhas do dataframe
@@ -50,7 +50,7 @@ print("---------------------------------------------------------")
 print("\n")
 
 
-# In[186]:
+# In[ ]:
 
 
 #Exibindo informações sobre a estrutura do dataset
@@ -79,7 +79,7 @@ print("---------------------------------------------------------")
 print("\n")
 
 
-# In[198]:
+# In[ ]:
 
 
 print("EXCLUSÃO DE ATRIBUTOS IRRELEVANTES E COM GRANDE QUANTIDADE DE DADOS NULOS:")
@@ -226,7 +226,7 @@ print("\nDataset resultado após as alterações:")
 print(tabulate(df.head(10), headers=df.columns, tablefmt="grid"))
 
 
-# In[213]:
+# In[ ]:
 
 
 # Contagem absoluta por classe
@@ -244,6 +244,7 @@ tabela_classes["Proporção"] = (tabela_classes["Quantidade"] / total * 100).rou
 print("\n\n\nDESCRIÇÃO DAS CARACTERÍSTICAS POPULACIONAIS DOS PASSAGEIROS POR CLASSE:")
 print("\nDistribuição de passageiros por classe (quantidade absoluta e proporção):")
 print(tabulate(tabela_classes, headers=tabela_classes.columns, tablefmt="grid"))
+print("\nObservação: A classe 3 é a mais populosa, representando 55,1% dos passageiros, seguida pela classe 1 com 24,2% e classe 2 com 20,7%.")
 
 
 # In[ ]:
@@ -357,29 +358,7 @@ print(tabulate(tabela_final, headers=tabela_final.columns, tablefmt="grid"))
 
 
 
-# In[169]:
-
-
-print("Observações:"
-"\nClasse 1: É a classe com a maior mediana de idade (37),"
-"\n          formada por maioria de passageiros do sexo masculino (56,5%), adultos (75,5%)."
-"\n          Possui a menor taxa de crianças pequenas (1,4%)"
-"\n          e a maior taxa de idosos (6,5)."
-"\n          É a classe com maior poder aquisitivo - maior valor médio pago pela tarifa (84,1547)."
-
-"\n\nClasse 2: Formada por maioria do sexo masculino (58,7%)"
-"\n          também maioria adultos (66,8%),"
-"\n          com uma taxa significativamente mais alta de crianças pequenas (8,2%)"
-"\n          e jovens adultos (19,0%)."
-"\n          É a classe menos populosa do navio (20,7% dos passageiros)."
-
-"\n\nClasse 3: É a classe mais populosa do navio (55,1%)"
-"\n          e também a mais jovem (mediana 24),"
-"\n          composta em sua maioria por jovens adultos (48,5%)"
-"\n          e uma taxa significativamente maior de crianças maiores (9,4%).")
-
-
-# In[214]:
+# In[215]:
 
 
 # Filtrando apenas os sobreviventes
@@ -402,7 +381,7 @@ tabela_sobreviventes["Proporção"] = (
 
 # Imprimindo tabela formatada
 print("\n\n\nDESCRIÇÃO DAS CARACTERÍSTICAS DOS SOBREVIVENTES POR CLASSE:")
-print("\nSobreviventes por classe (quantidade absoluta e proporção):")
+print("\nDistribuição de sobreviventes por classe (quantidade absoluta e proporção):")
 print(tabulate(tabela_sobreviventes, headers=tabela_sobreviventes.columns, tablefmt="grid"))
 
 
@@ -517,13 +496,17 @@ print("\nDistribuição de sobreviventes por gênero e classe (quantidade e prop
 print(tabulate(tabela_final, headers=tabela_final.columns, tablefmt="grid"))
 
 
-# In[174]:
+# In[ ]:
 
 
 # Criar faixas etárias
 bins = [0, 7, 17, 24, 59, 120]
 labels = ["Crianças menores", "Crianças maiores", "Adultos jovens", "Adulto", "Idoso"]
 df["FaixaEtaria"] = pd.cut(df["Idade"], bins=bins, labels=labels)
+
+
+# In[ ]:
+
 
 # Função para preparar dados para o star plot
 def preparar_dados(df):
@@ -533,9 +516,9 @@ def preparar_dados(df):
         "Classe 3ª": (df["Classe"] == 3).sum(),
         "Homens": (df["Genero"] == "Masculino").sum(),
         "Mulheres": (df["Genero"] == "Feminino").sum(),
-        "Crianças pequenas": (df["FaixaEtaria"] == "Criança").sum(),
-        "Crianças maiores": (df["FaixaEtaria"] == "Adolescente").sum(),
-        "Adultos jovens": (df["FaixaEtaria"] == "Adulto Jovem").sum(),
+        "Crianças menores": (df["FaixaEtaria"] == "Crianças menores").sum(),
+        "Crianças maiores": (df["FaixaEtaria"] == "Crianças maiores").sum(),
+        "Adultos jovens": (df["FaixaEtaria"] == "Adultos jovens").sum(),
         "Adultos": (df["FaixaEtaria"] == "Adulto").sum(),
         "Idosos": (df["FaixaEtaria"] == "Idoso").sum()
     }
@@ -545,8 +528,8 @@ def preparar_dados(df):
 dados_total = preparar_dados(df)
 dados_sobreviventes = preparar_dados(df[df["Sobrevivente"] == "Sobrevivente"])
 
-# Função para plotar star plot sobreposto
-def star_plot_comparativo(dados1, dados2, titulo):
+# Função para plotar star plot sobreposto e salvar
+def star_plot_comparativo(dados1, dados2, titulo,caminho_arquivo):
     categorias = list(dados1.keys())
     valores1 = list(dados1.values())
     valores2 = list(dados2.values())
@@ -574,10 +557,18 @@ def star_plot_comparativo(dados1, dados2, titulo):
     ax.set_xticklabels(categorias)
     ax.set_title(titulo, size=15, pad=20)
     ax.legend(loc="upper right", bbox_to_anchor=(1.2, 1.1))
-    #plt.show()
 
-# Gráfico único comparativo
-#star_plot_comparativo(dados_total, dados_sobreviventes, "Comparação População vs Sobreviventes")
-    plt.savefig("../Results/star_plot_comparativo.png", bbox_inches="tight")
+    # Salvar gráfico
+    caminho_arquivo = "../Results/star_plot_comparativo.png"
+    plt.savefig(caminho_arquivo, dpi=300, bbox_inches="tight")
     plt.close()
+    print(f"✅ Gráfico salvo em: {caminho_arquivo}")
+
+# Chamada da funcao para criar o star plot comparativo
+star_plot_comparativo(
+    dados_total,
+    dados_sobreviventes,
+    "Comparação População vs Sobreviventes",
+    "../Results/star_plot_comparativo.png"
+)
 
